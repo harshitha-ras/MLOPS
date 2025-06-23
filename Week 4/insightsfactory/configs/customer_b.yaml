@@ -1,0 +1,20 @@
+name: "Customer B"
+steps:
+  - script: "scripts/setup_customer_tables.py"
+    args:
+      command: "add_customer"
+      name: "Customer B"
+  - script: "scripts/generate_product_aggregates.py"
+    args:
+      input_table: "merged_data"
+      customer_id: "Customer B"
+      output_table: "customer_b_metrics"
+      metrics:
+        device_age:
+          - ["average_age", "mean"]
+          - ["median_age", "median"]
+          - ["max_age", "max"]
+        days_to_resolve:
+          - ["average_resolution_days", "mean"]
+          - ["median_resolution_days", "median"]
+          - ["max_resolution_days", "max"]

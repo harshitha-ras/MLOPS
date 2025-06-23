@@ -1,0 +1,16 @@
+name: "Customer A"
+steps:
+  - script: "scripts/setup_customer_tables.py"
+    args:
+      command: "add_customer"
+      name: "Customer A"
+  - script: "scripts/generate_product_aggregates.py"
+    args:
+      input_table: "merged_data"
+      customer_id: "Customer A"
+      output_table: "customer_a_metrics"
+      metrics:
+        product_key:
+          - ["sales_count", "count_distinct"]
+        transaction_number:
+          - ["ticket_count", "count_distinct"]
