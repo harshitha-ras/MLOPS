@@ -1,0 +1,52 @@
+Text Generation API - Specification
+-----------------------------------
+
+Base URL:
+---------
+http://localhost:8000
+
+Endpoints:
+----------
+
+1. POST /generate
+-----------------
+Generate a response based on a given text prompt.
+
+Request:
+--------
+Content-Type: application/json
+
+Body:
+{
+  "prompt": "Once upon a time",
+  "user": "leo"
+}
+
+Fields:
+- prompt (string, required) → Input prompt for generation
+- user (string, optional) → Identifier for logging (default: "anonymous")
+
+Response:
+---------
+HTTP 200 OK
+{
+  "response": "Once upon a time... and then it happened unexpectedly."
+}
+
+If unsafe prompt is detected:
+HTTP 200 OK
+{
+  "error": "Prompt contains unsafe content."
+}
+
+Behavior:
+---------
+- Filters offensive words in prompt before generating text
+- Generated response is also filtered
+- Logs every request/response pair in `usage_metrics.txt`
+
+Documentation:
+--------------
+Visit:
+http://localhost:8000/docs
+for FastAPI-generated interactive API docs

@@ -1,0 +1,43 @@
+Performance Metrics - Local LLM Service
+---------------------------------------
+
+Model:
+------
+- Name: TinyLlama-1.1B-Chat-v1.0.Q4_K_M.gguf
+- Size: ~420 MB
+- Tokens: 1.1B
+
+Hardware:
+---------
+- CPU: Standard consumer-level processor (e.g., i5/i7/Ryzen)
+- RAM: Minimum 4 GB free RAM recommended
+
+Performance:
+------------
+- Cold load time: ~2-3 seconds
+- Average inference speed: ~5-10 tokens/sec on CPU
+- Max token length: 100 (adjustable)
+
+Caching:
+--------
+- JSON file-based
+- Instant return for repeated prompts
+- Uses SHA256 hashing of prompt text
+
+Benchmarks:
+-----------
+| Prompt Length | First Run (sec) | Cached Run (sec) |
+|---------------|-----------------|------------------|
+| Short (3-5 words) | ~4.2s         | <0.01s           |
+| Medium (10-15)    | ~6.1s         | <0.01s           |
+
+Limitations:
+------------
+- Only 1.1B parameter model: good for short tasks, not deep reasoning
+- Not suitable for long conversations without external memory
+- No GPU acceleration (intended for local/offline CPU-only setup)
+
+Notes:
+------
+- Use caching aggressively for repeated patterns.
+- Avoid sending overly long prompts (256+ tokens).

@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./step6_responsible_ai"
+    ]
+}

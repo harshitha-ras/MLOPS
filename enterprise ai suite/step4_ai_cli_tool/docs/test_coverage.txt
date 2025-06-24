@@ -1,0 +1,43 @@
+Test Coverage - CLI Tool
+------------------------
+
+Manual Tests Performed:
+-----------------------
+1. Run with valid prompt:
+   ✅ CLI returns generated response
+
+2. Run with filtered prompt (e.g., "kill"):
+   ✅ Returns warning about unsafe content
+
+3. Run with missing prompt:
+   ✅ Argument parser throws error
+
+4. Run with unreachable API:
+   ✅ handler.py logs connection error in error.log
+
+5. Batch file (valid):
+   ✅ All prompts processed successfully
+
+6. Batch file (missing):
+   ✅ Catches FileNotFoundError and logs
+
+Notes:
+------
+- Since this is a CLI tool, tests are currently manual.
+- Easy to extend to automated testing using `unittest` or `pytest`.
+- Example: Wrap `run_prompt()` in testable functions with mocks
+
+Recommendation:
+---------------
+Add automated integration tests in future that:
+- Mock API response
+- Capture stdout
+- Validate log content
+
+Coverage Summary:
+-----------------
+✅ Prompt validation  
+✅ API communication  
+✅ Error handling  
+✅ Logging  
+✅ Automation support

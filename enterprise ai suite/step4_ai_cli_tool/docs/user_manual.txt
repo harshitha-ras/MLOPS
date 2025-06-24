@@ -1,0 +1,42 @@
+User Manual - AI Text Generator CLI
+-----------------------------------
+
+Overview:
+---------
+This CLI tool allows users to interact with the local Text Generation API
+built in Step 3. Prompts can be sent via command-line, and responses
+will be printed in real time.
+
+Usage:
+------
+
+1. Single Prompt:
+-----------------
+Run a single prompt via terminal:
+
+> python cli.py --prompt "Tell me a story about a robot" --user leo
+
+Arguments:
+- --prompt : Required. The input text prompt.
+- --user   : Optional. A user identifier. Defaults to "cli".
+
+2. Batch Prompts (Automation):
+------------------------------
+You can run multiple prompts from a file using `automator.py`.
+
+Step 1: Create a plain text file:
+> prompts.txt
+
+Step 2: Run batch:
+> python -c "from automator import run_batch; run_batch('prompts.txt')"
+
+3. Output:
+----------
+- Successful responses are printed in terminal.
+- All errors are printed and logged in `error.log`.
+
+Example:
+---------
+> python cli.py --prompt "Define symbiosis"
+🧠 AI Response:
+Define symbiosis leads to a surprising result.

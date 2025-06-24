@@ -1,0 +1,52 @@
+Security Architecture - SmartEnterprise AI Suite
+-------------------------------------------------
+
+Overview:
+---------
+This document outlines the security and privacy design
+implemented across the AI Suite, focusing on:
+
+- Content filtering
+- Prompt/response sanitization
+- Audit logging
+- Privacy redaction
+
+1. Input Filtering:
+-------------------
+- File: filters.py
+- Checks for dangerous keywords such as: "kill", "abuse", "suicide"
+- Blocks unsafe prompts before generation
+- Ensures AI output is only generated for safe, acceptable content
+
+2. Output Sanitization:
+-----------------------
+- Replaces unsafe or blocked words in AI output with [filtered]
+- Ensures no unexpected or toxic text leaks into the UI/API
+
+3. Privacy Protection:
+----------------------
+- Redacts phone numbers and email addresses in generated output
+- File: privacy.py
+- Ensures user PII is never exposed by the AI or stored in logs
+
+4. Audit Logging:
+-----------------
+- All interactions are logged in audit_log.jsonl
+- Fields: timestamp, prompt, response, source (cli/ui/api), safety flag
+- Helps ensure accountability and traceability
+
+5. API-Level Security:
+----------------------
+- No external access by default (localhost only)
+- Can be protected by proxy auth if exposed externally
+
+6. CLI & Dashboard Trust Model:
+-------------------------------
+- All local tools log prompts and outputs
+- Real-time filtering/sanitization integrated in backend, not UI
+
+Conclusion:
+-----------
+This layered approach balances usability with responsible AI
+design. Safety nets are placed before generation, after generation,
+and in storage/logging layers.

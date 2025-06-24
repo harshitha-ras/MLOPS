@@ -1,0 +1,43 @@
+API Documentation - Local LLM Service
+-------------------------------------
+
+Base URL:
+---------
+http://localhost:8000
+
+Endpoint:
+---------
+
+POST /generate
+--------------
+Generates a response based on the prompt using the local LLM.
+
+Request:
+--------
+Content-Type: application/json
+
+Body:
+{
+  "prompt": "Explain photosynthesis"
+}
+
+Response:
+---------
+HTTP 200 OK
+
+{
+  "response": "Photosynthesis is the process by which green plants...",
+  "cached": false
+}
+
+If the result is cached:
+{
+  "response": "Photosynthesis is the process...",
+  "cached": true
+}
+
+Notes:
+------
+- Caching is used to speed up repeated requests.
+- Maximum generation length is limited to 100 tokens.
+- Prompt format is plain natural language.

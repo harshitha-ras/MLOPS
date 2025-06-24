@@ -1,0 +1,44 @@
+[
+  {
+    "date": "2025-06-18",
+    "messages_sent": 27,
+    "active_users": 9,
+    "avg_latency": 0.21
+  },
+  {
+    "date": "2025-06-19",
+    "messages_sent": 16,
+    "active_users": 4,
+    "avg_latency": 0.87
+  },
+  {
+    "date": "2025-06-20",
+    "messages_sent": 42,
+    "active_users": 10,
+    "avg_latency": 0.23
+  },
+  {
+    "date": "2025-06-21",
+    "messages_sent": 45,
+    "active_users": 8,
+    "avg_latency": 0.88
+  },
+  {
+    "date": "2025-06-22",
+    "messages_sent": 41,
+    "active_users": 8,
+    "avg_latency": 0.46
+  },
+  {
+    "date": "2025-06-23",
+    "messages_sent": 17,
+    "active_users": 7,
+    "avg_latency": 0.31
+  },
+  {
+    "date": "2025-06-24",
+    "messages_sent": 46,
+    "active_users": 9,
+    "avg_latency": 0.7
+  }
+]

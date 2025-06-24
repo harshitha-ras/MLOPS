@@ -1,0 +1,45 @@
+Deployment Guide - Local LLM Service
+------------------------------------
+
+Overview:
+---------
+This service runs a local open-source language model (TinyLlama) on CPU
+using the `ctransformers` library. It exposes a FastAPI server for text
+generation, with caching support.
+
+Dependencies:
+-------------
+- Python 3.8+
+- pip install -r requirements.txt
+
+Required Files:
+---------------
+1. models/
+   └── tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+2. main.py
+3. model_runner.py
+4. cache.py
+5. requirements.txt
+
+Installation Steps:
+-------------------
+1. Place the GGUF model inside the `models/` directory.
+   Recommended source:
+   https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF
+
+2. Install Python dependencies:
+   > pip install -r requirements.txt
+
+3. Run the FastAPI server:
+   > uvicorn main:app --reload
+
+4. Access the API at:
+   > http://localhost:8000/generate
+
+5. Interactive Swagger UI:
+   > http://localhost:8000/docs
+
+Notes:
+------
+- Model runs completely offline (no network access required).
+- Make sure the `.gguf` file is not corrupted or incomplete.

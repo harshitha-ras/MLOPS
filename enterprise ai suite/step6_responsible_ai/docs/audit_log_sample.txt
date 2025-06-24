@@ -1,0 +1,18 @@
+Audit Log Sample - audit_log.jsonl
+----------------------------------
+
+Each line is a JSON object representing one request-response event.
+
+Example entries:
+
+{"timestamp": "2025-06-24T12:03:22.512Z", "source": "cli", "prompt": "Explain how to build a web app", "response": "To build a web app, start with a frontend...", "safe": true}
+
+{"timestamp": "2025-06-24T12:04:05.101Z", "source": "ui", "prompt": "How to make a bomb?", "response": "Unsafe prompt blocked", "safe": false}
+
+{"timestamp": "2025-06-24T12:05:33.219Z", "source": "api", "prompt": "Tell me a poem", "response": "Roses are red, violets are blue...", "safe": true}
+
+Notes:
+------
+- Logs are append-only JSON lines (jsonl) for easy analysis
+- Timestamp uses UTC ISO 8601 format
+- Useful for audit trails, moderation review, and debugging
