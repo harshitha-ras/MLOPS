@@ -1,38 +1,30 @@
 import subprocess
 import threading
-import time
-import webbrowser
+import os
 
-def run_streamlit_chat():
-    subprocess.run(["streamlit", "run", "step1_secure_chat/app.py"])
-
-def run_streamlit_dashboard():
-    subprocess.run(["streamlit", "run", "step2_analytics_dashboard/app.py"])
-
-def run_llm_backend():
+def run_fastapi():
     subprocess.run(["uvicorn", "step5_local_llm_service.main:app", "--host", "127.0.0.1", "--port", "8000"])
 
-def run_cli_tool():
-    subprocess.run(["python", "step4_cli_tool/cli.py"])
+def run_streamlit():
+    env = os.environ.copy()
+    env["PYTHONPATH"] = os.getcwd()
+    subprocess.run(["streamlit", "run", "step1_secure_chat/app.py"], env=env)
+
+
+def run_cli():
+    subprocess.run(["python", "step4_ai_cli_tool/cli.py", "--prompt", "Hello", "--user", "cli_user"])
 
 if __name__ == "__main__":
     print("[*] Launching SmartEnterprise AI Suite...")
 
-    # LLM API server
-    threading.Thread(target=run_llm_backend, daemon=True).start()
-    time.sleep(2)
+    t1 = threading.Thread(target=run_fastapi)
+    t2 = threading.Thread(target=run_streamlit)
+    t3 = threading.Thread(target=run_cli)
 
-    # Streamlit Chat UI
-    threading.Thread(target=run_streamlit_chat).start()
+    t1.start()
+    t2.start()
+    t3.start()
 
-    # CLI Tool (optional)
-    threading.Thread(target=run_cli_tool).start()
-
-    # Optional: auto-launch dashboard
-    # threading.Thread(target=run_streamlit_dashboard).start()
-
-    # Auto-open chat interface
-    time.sleep(3)
-    webbrowser.open("http://localhost:8501")
-
-    print("[*] All systems running. Press Ctrl+C to stop.")
+    t1.join()
+    t2.join()
+    t3.join()

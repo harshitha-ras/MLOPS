@@ -1,41 +1,20 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from step5_local_llm_service.model_runner import run_llm
+from step5_local_llm_service.cache import get_cached, set_cached
 
-from model_runner import run_llm
-from cache import get_cached, set_cached
-from step6_responsible_ai.filters import is_safe, sanitize
-from step6_responsible_ai.privacy import apply_privacy
-from step6_responsible_ai.auditor import log_interaction
+app = FastAPI()
 
-app = FastAPI(title="Local LLM API (Secure + Auditable)")
-
-class Prompt(BaseModel):
+class PromptRequest(BaseModel):
     prompt: str
+    user: str
 
 @app.post("/generate")
-def generate(req: Prompt):
-    prompt = req.prompt.strip()
-
-    # 1. Safety check
-    if not is_safe(prompt):
-        log_interaction("api", prompt, "Unsafe prompt blocked", False)
-        return {"error": "Unsafe prompt content detected."}
-
-    # 2. Cache check
+def generate(data: PromptRequest):
+    prompt, user = data.prompt, data.user
     cached = get_cached(prompt)
     if cached:
-        log_interaction("api", prompt, cached, True)
         return {"response": cached, "cached": True}
-
-    # 3. Run LLM
-    raw_response = run_llm(prompt)
-
-    # 4. Sanitize output
-    safe_response = sanitize(raw_response)
-    safe_response = apply_privacy(safe_response)
-
-    # 5. Cache and log
-    set_cached(prompt, safe_response)
-    log_interaction("api", prompt, safe_response, True)
-
-    return {"response": safe_response, "cached": False}
+    response = run_llm(prompt)
+    set_cached(prompt, response)
+    return {"response": response}

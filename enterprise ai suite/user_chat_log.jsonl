@@ -1,0 +1,6 @@
+{"from": "admin", "to": "somebody", "message": "Hey, you exist!"}
+{"from": "somebody", "to": "admin", "message": "admin admin admin"}
+{"from": "admin", "to": "admin", "message": "admin"}
+{"from": "admin", "to": "somebody", "message": "You exist, don't you?"}
+{"from": "admin", "to": "somebody", "message": "Don't you dare", "timestamp": "2025-06-24T21:56:46.013185"}
+{"from": "somebody", "to": "admin", "message": "Dare what?", "timestamp": "2025-06-24T21:57:10.202331"}

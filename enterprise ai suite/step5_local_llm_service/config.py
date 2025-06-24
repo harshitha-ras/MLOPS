@@ -1,0 +1,1 @@
+MODEL_PATH = "step5_local_llm_service/models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"

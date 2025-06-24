@@ -1,25 +1,7 @@
-import json
-import hashlib
+cache_dict = {}
 
-CACHE_FILE = "cache.json"
+def get_cached(prompt: str):
+    return cache_dict.get(prompt)
 
-def _hash(prompt):
-    return hashlib.sha256(prompt.encode()).hexdigest()
-
-def get_cached(prompt):
-    try:
-        with open(CACHE_FILE, "r") as f:
-            cache = json.load(f)
-        return cache.get(_hash(prompt))
-    except:
-        return None
-
-def set_cached(prompt, output):
-    try:
-        with open(CACHE_FILE, "r") as f:
-            cache = json.load(f)
-    except:
-        cache = {}
-    cache[_hash(prompt)] = output
-    with open(CACHE_FILE, "w") as f:
-        json.dump(cache, f, indent=2)
+def set_cached(prompt: str, response: str):
+    cache_dict[prompt] = response

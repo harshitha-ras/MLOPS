@@ -1,24 +1,20 @@
 import argparse
 import requests
-from handler import handle_error
 
-API_URL = "http://localhost:8000/generate"
+parser = argparse.ArgumentParser()
+parser.add_argument("--prompt", required=True, help="Enter the prompt for LLM")
+parser.add_argument("--user", default="cli_user", help="Username to track usage")
+args = parser.parse_args()
 
-def run_prompt(prompt, user="cli"):
-    try:
-        response = requests.post(API_URL, json={"prompt": prompt, "user": user})
-        data = response.json()
-        if "response" in data:
-            print("\n🧠 AI Response:\n", data["response"])
-        elif "error" in data:
-            print("\n⚠️ Error:", data["error"])
-    except Exception as e:
-        handle_error("CLI request failed", str(e))
+print(f"User: {args.user}")
+print(f"Prompt: {args.prompt}")
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="AI Text Generator CLI Tool")
-    parser.add_argument("--prompt", type=str, help="Prompt text to send to the AI", required=True)
-    parser.add_argument("--user", type=str, default="cli", help="User ID (for logging)")
-    args = parser.parse_args()
+response = requests.post("http://127.0.0.1:8000/generate", json={
+    "prompt": args.prompt,
+    "user": args.user
+})
 
-    run_prompt(args.prompt, args.user)
+if response.status_code == 200:
+    print("LLM Response:", response.json()["response"])
+else:
+    print("Error occurred:", response.text)

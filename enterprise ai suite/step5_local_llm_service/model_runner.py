@@ -1,18 +1,11 @@
 from ctransformers import AutoModelForCausalLM
-import os
-
-MODEL_FILE = "tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
-MODEL_PATH = os.path.join("models", MODEL_FILE)
-
-llm = AutoModelForCausalLM.from_pretrained(
-    MODEL_PATH,
-    model_type="llama",         # or "mistral", "phi" if using different model
-    local_files_only=True
-)
+from step5_local_llm_service.config import MODEL_PATH
 
 def run_llm(prompt: str) -> str:
-    result = llm(prompt, max_new_tokens=50)
-    if isinstance(result, str):
-        return result
-    else:
-        return "".join(result)
+    llm = AutoModelForCausalLM.from_pretrained(
+        model_path_or_repo_id=MODEL_PATH,
+        model_type="llama",     # or try "llama" vs "llama-cpp"
+        max_new_tokens=256
+    )
+    result = llm(prompt)
+    return result if isinstance(result, str) else "".join(result)

@@ -1,15 +1,12 @@
 import json
 from datetime import datetime
 
-AUDIT_LOG = "audit_log.jsonl"
-
-def log_interaction(source: str, prompt: str, response: str, safe: bool):
-    record = {
+def log_audit(prompt: str, response: str, user: str):
+    entry = {
         "timestamp": datetime.utcnow().isoformat(),
-        "source": source,             # e.g., cli, ui, api
+        "user": user,
         "prompt": prompt,
-        "response": response,
-        "safe": safe
+        "response": response
     }
-    with open(AUDIT_LOG, "a") as f:
-        f.write(json.dumps(record) + "\n")
+    with open("audit_log.jsonl", "a") as f:
+        f.write(json.dumps(entry) + "\n")
