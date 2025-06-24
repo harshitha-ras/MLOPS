@@ -4,3 +4,6 @@
 {"from": "admin", "to": "somebody", "message": "You exist, don't you?"}
 {"from": "admin", "to": "somebody", "message": "Don't you dare", "timestamp": "2025-06-24T21:56:46.013185"}
 {"from": "somebody", "to": "admin", "message": "Dare what?", "timestamp": "2025-06-24T21:57:10.202331"}
+{"from": "admin", "to": "Admin", "message": "hello how are you", "timestamp": "2025-06-24T13:39:16.844966"}
+{"from": "admin", "to": "Admin", "message": "hello how are you", "timestamp": "2025-06-24T13:39:20.594866"}
+{"from": "admin", "to": "admin", "message": "hello how are you", "timestamp": "2025-06-24T13:39:32.852896"}
